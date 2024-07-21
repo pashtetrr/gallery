@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  directus:
+    image: directus/directus:latest
+    ports:
+      - '8055:8055'
+    environment:
+      DIRECTUS_DATABASE_HOST: db
+      DIRECTUS_DATABASE_PORT: 3306
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "d1r3ctu5"
+      DIRECTUS_DATABASE_DB: directus
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: 'http://localhost:3000'
+    volumes:
+      - ./database:/directus/database
+      - ./uploads:/directus/uploads
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: directus
+      MYSQL_USER: directus
+      MYSQL_PASSWORD: directus
+    volumes:
+      - db-data:/var/lib/mysql
+
+  frontend:
+    build:
+      context: ./photo-gallery-frontend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - directus
+
+volumes:
+  directus-uploads:
+  db-data:

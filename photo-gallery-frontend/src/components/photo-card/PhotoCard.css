@@ -1,0 +1,31 @@
+.photo-card {
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  width: 300px; /* фиксированная ширина */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-image {
+  width: 100%;
+  height: 200px; /* фиксированная высота */
+  object-fit: cover; /* для сохранения пропорций и обрезки изображения, если оно превышает размеры */
+}
+
+.photo-info {
+  padding: 10px;
+}
+
+.photo-title {
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.photo-description {
+  font-size: 0.9em;
+  color: #555;
+}
